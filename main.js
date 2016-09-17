@@ -1,9 +1,9 @@
 $rings = $('.rings')
 
-var towers = {
+var game = {
   columns: {
-    c1: [1,2,3,4],
-    c2: [],
+    c1: [],
+    c2: [1,2,3,4],
     c3: [],
   },
   rings: 4,
@@ -14,7 +14,8 @@ var towers = {
   },
   checkMove: function() {},
   moveRing: function(ring, destination) {
-    ring.appendTo(destination)
+    this.moves++;
+    ring.appendTo(destination);
   },
   checkWin: function() {
     for (col in this.columns) {
