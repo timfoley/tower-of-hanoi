@@ -2,7 +2,7 @@
   // [ ] display move counter
   // [ ] display gameover text
   // [ ] select number of rings
-
+  // [ ] undo button
 //QUESTIONS:
   // should I daisy chain my methods, or have them call in sequence?
 
@@ -35,10 +35,10 @@ var game = {
   click: function(clicked) {
     clickedRing = clicked.children().eq(0);
     if (!this.active) {
-      game.active = true;
       clickedRing.addClass('active');
       this.originCol = clicked;
       this.moverId = clickedRing.attr('id');
+      this.active = true;
     } else if (this.checkMove(clickedRing)){
       this.moveRing(clicked);
       this.checkWin();
@@ -60,11 +60,14 @@ var game = {
   moveRing: function(destination) {
     this.moves++;
     $('.active').prependTo(destination);
-    this.softReset();
+    this.softReset()
   },
   softReset: function() {
-    $rings.removeClass('active hover');
     this.active = false;
+    // TODO this feels klugey, but I can't get it to work otherwise
+    window.setTimeout(function() {
+      $rings.removeClass('active hover');
+    }, 20)
   },
   checkWin: function() {
     $winningColumns.each(function(column){
