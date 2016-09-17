@@ -76,6 +76,7 @@ footer {
   padding-left: 2rem;
   padding-right: 2rem;
   cursor: pointer;
+  overflow-wrap: break-word;
 }
 
 .col+.col {
@@ -87,6 +88,14 @@ footer {
   background: #E53A40;
   /*Easing from http://easings.net/*/
   transition: all 100ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.gameOver {
+  color: white;
+  margin: auto -20rem  auto -20rem ;
+  font-size: 3rem;
+  padding: 0;
+  z-index: 100;
 }
 
 .r1 {

@@ -72,12 +72,14 @@ var game = {
     })
   },
   gameOver: function() {
+    $('.c2').append("<div class='gameOver'>YOU WIN!</div>");
     console.log("You won in " + this.moves + " moves!");
   },
   reset: function() {
     this.softReset;
     this.moves = 0;
     $moves.html('MOVES: ' + this.moves);
+    $('.gameOver').remove();
     for (var i = 0; i < this.rings; i++) {
       $rings.eq(i).appendTo('.c2')
     }
