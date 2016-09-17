@@ -1,10 +1,10 @@
 //TODO:
-  // [ ] display move counter
-  // [ ] display gameover text
   // [ ] select number of rings
   // [ ] undo button
+  // [ ] solver
 //QUESTIONS:
   // should I daisy chain my methods, or have them call in sequence?
+  // should I use `this.` or `game.`? I'm assuming that when I get more OOJS about it, `this` would be easier to work with.
 
 $rings = $('.ring');
 $columns = $('.col');
@@ -30,17 +30,14 @@ var game = {
       this.moverId = clickedRing.attr('id');
       this.active = true;
     } else if (this.checkMove(clicked)){
-      // this.targetCol = clicked;
       game.moveRing(clicked);
       this.softReset();
       this.incrementCounter();
       this.checkWin();
     } else {
     }
-
   },
   checkMove: function(target) {
-
     this.targetCol = target;
     // select eq(1) because we need to ignore the floating ring
     targetRing = target.children().eq(1);
@@ -85,8 +82,9 @@ var game = {
     console.log("You won in " + this.moves + " moves!");
   },
   reset: function() {
+    // this will be better when I can just make another instance with a constructor function, right?
     this.over = false;
-    this.softReset;
+    this.softReset();
     this.moves = 0;
     this.moverId = 0;
     this.targetId = 0;
