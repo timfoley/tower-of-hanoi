@@ -9,6 +9,9 @@ body {
   flex-direction: column;
   background: #090707;
   font-family: 'Press Start 2P', sans-serif;
+  width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 header {
@@ -31,6 +34,36 @@ h1 {
   height: 50vh;
   border: 17px solid #30A9DE;
   margin-top: 5px;
+}
+
+.flash {
+  animation-duration: 300ms;
+  animation-name: flash;
+  animation-timing-function: cubic-bezier(.42, 0, .58, 1);
+}
+
+@keyframes flash {
+  0% { background: #090707 }
+  50% { background: white; }
+  100% { background: #090707 }
+}
+
+footer {
+  width: 100%;
+  margin: 20px;
+  text-align: right;
+}
+
+#reset {
+  padding: 10px 20px 10px 20px;
+  color: #090707;
+  text-decoration: none;
+  background: white;
+  transition: all 200ms ease;
+}
+
+#reset:hover {
+  background: #E53A40;
 }
 
 .col {

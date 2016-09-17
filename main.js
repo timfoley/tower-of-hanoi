@@ -10,20 +10,7 @@ $rings = $('.ring');
 $columns = $('.col');
 $winningColumns = $('.c1,.c3');
 $moves = $('.moves');
-
-$columns.on('click', function(){
-  game.click($(this));
-});
-
-$('.col').mouseenter(function(){
-  if (!game.active) {
-    $(this).children('.ring').eq(0).addClass('hover');
-  }
-});
-
-$('.col').mouseleave(function(){
-  $(this).children('.ring').eq(0).removeClass('hover');
-});
+$reset = $('#reset');
 
 var game = {
   rings: 4,
@@ -70,7 +57,8 @@ var game = {
   },
   softReset: function() {
     this.active = false;
-    // TODO this feels klugey, but I can't get it to work otherwise
+    // this feels klugey, but I can't get it to work otherwise
+    // TODO rewrite using animation rather than transition!
     window.setTimeout(function() {
       $rings.removeClass('active hover');
     }, 20)
@@ -89,10 +77,28 @@ var game = {
   reset: function() {
     this.softReset;
     this.moves = 0;
-    $moves.html('moves: ' + this.moves)
+    $moves.html('MOVES: ' + this.moves);
     for (var i = 0; i < this.rings; i++) {
       $rings.eq(i).appendTo('.c2')
     }
   },
-
 }
+
+$columns.on('click', function(){
+  game.click($(this));
+});
+
+$('.col').mouseenter(function(){
+  if (!game.active) {
+    $(this).children('.ring').eq(0).addClass('hover');
+  }
+});
+
+$('.col').mouseleave(function(){
+  $(this).children('.ring').eq(0).removeClass('hover');
+});
+
+$reset.on('click', function() {
+  // why didn't this work when I did `$reset.on('click', game.reset)` ?
+  game.reset();
+});
