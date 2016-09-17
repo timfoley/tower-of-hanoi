@@ -11,14 +11,14 @@ body {
 
 h1 {
   color: #E53A40;
+  font-family: 'Press Start 2P', sans-serif;
 }
 
 .container {
   display: flex;
   width: 700px;
   height: 50vh;
-  margin-top: 50px;
-  border: 8px solid #30A9DE;
+  border: 10px solid #30A9DE;
 }
 
 .col {
@@ -34,7 +34,7 @@ h1 {
 }
 
 .col+.col {
-  border-left: 3px dashed #EFDC05;
+  border-left: 5px dashed #EFDC05;
 }
 
 .ring {
