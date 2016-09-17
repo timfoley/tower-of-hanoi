@@ -86,14 +86,14 @@ footer {
 }
 
 .col+.col {
-  border-left: 13px dashed #EFDC05;
+  border-left: 10px dashed #EFDC05;
 }
 
 .ring {
   height: 1.5rem;
   background: #E53A40;
   /*Easing from http://easings.net/*/
-  transition: all 100ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .gameOver {
@@ -109,6 +109,7 @@ footer {
 }
 
 .active {
+  background-color: white;
   transform: translate(0, -1rem);
 }
 
