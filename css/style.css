@@ -59,11 +59,17 @@ footer {
   color: #090707;
   text-decoration: none;
   background: white;
-  transition: all 200ms ease;
+  transition: all 100ms ease;
+  display: inline-block;
 }
 
 #reset:hover {
   background: #E53A40;
+}
+
+#reset:active {
+  transform: translate(0, 2px);
+  /*background: #30A9DE;*/
 }
 
 .col {
@@ -98,6 +104,14 @@ footer {
   z-index: 100;
 }
 
+.hover {
+  transform: translate(0, -1rem);
+}
+
+.active {
+  transform: translate(0, -1rem);
+}
+
 .r1 {
   width: 25%;
 }
@@ -112,12 +126,4 @@ footer {
 
 .r4 {
   width: 100%
-}
-
-.hover {
-  transform: translate(0, -1rem);
-}
-
-.active {
-  transform: translate(0, -1rem);
 }

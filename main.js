@@ -20,8 +20,9 @@ var game = {
   targetCol: {},
   moverId: 0,
   targetId: 0,
+  over: false,
   click: function(clicked) {
-    clickedRing = clicked.children().eq(0);
+    clickedRing = clicked.children('.ring').eq(0);
     if (!this.active) {
       clickedRing.addClass('active');
       this.originCol = clicked;
@@ -72,10 +73,12 @@ var game = {
     })
   },
   gameOver: function() {
-    $('.c2').append("<div class='gameOver'>YOU WIN!</div>");
+    this.over = true;
+    $('.c2').prepend("<div class='gameOver'>YOU WIN!</div>");
     console.log("You won in " + this.moves + " moves!");
   },
   reset: function() {
+    this.over = false;
     this.softReset;
     this.moves = 0;
     $moves.html('MOVES: ' + this.moves);
@@ -87,7 +90,9 @@ var game = {
 }
 
 $columns.on('click', function(){
-  game.click($(this));
+  if (!game.over){
+    game.click($(this));
+  }
 });
 
 $('.col').mouseenter(function(){
