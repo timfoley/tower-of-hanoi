@@ -1,3 +1,8 @@
+//TODO:
+  // [ ] display move counter
+  // [ ] display gameover text
+  // [ ] select number of rings
+
 //QUESTIONS:
   // should I daisy chain my methods, or have them call in sequence?
 
