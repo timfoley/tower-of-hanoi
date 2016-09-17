@@ -2,31 +2,37 @@ $rings = $('.rings')
 
 var towers = {
   columns: {
-    col1: [],
-    col2: [],
-    col3: [],
+    c1: [1,2,3,4],
+    c2: [],
+    c3: [],
   },
   rings: 4,
   moves: 0,
+  active: false,
+  click: function() {
+    // once column has been clicked, decide what to do
+  },
+  checkMove: function() {},
   moveRing: function(ring, destination) {
     ring.appendTo(destination)
   },
-  checkMove: function() {},
   checkWin: function() {
     for (col in this.columns) {
-      if (this.length === this.rings) {
+      console.log(col, this.columns[col].length);
+      if (this.columns[col].length === this.rings) {
         this.gameOver();
-      } else {
-        return false
+        return true;
       }
+      console.log("You haven't won yet");
     }
   },
-  gameOver: function() {},
+  gameOver: function() {
+    console.log("You WIN!");
+  },
 
 }
 
 $('.col').hover(function(){
-  console.log('HOVER');
   $(this).children('.ring').first().toggleClass('hover');
 })
 
