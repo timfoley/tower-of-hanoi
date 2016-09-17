@@ -15,7 +15,7 @@ h1 {
 
 .container {
   display: flex;
-  width: 80%;
+  width: 700px;
   height: 50vh;
   margin-top: 50px;
   border: 5px solid #30A9DE;
@@ -35,7 +35,6 @@ h1 {
 
 .col+.col {
   border-left: 3px dashed #EFDC05;
-
 }
 
 .ring {

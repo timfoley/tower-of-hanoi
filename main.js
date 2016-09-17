@@ -73,5 +73,12 @@ var game = {
   gameOver: function() {
     console.log("You won in " + this.moves + " moves!");
   },
+  reset: function() {
+    this.softReset;
+    this.moves = 0;
+    for (var i = 0; i < this.rings; i++) {
+      $rings.eq(i).appendTo('.c2')
+    }
+  },
 
 }
