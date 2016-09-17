@@ -51,7 +51,6 @@ var game = {
     } else {
       return false;
     }
-    // else give indication that move isn't legal (animation or something)
   },
   moveRing: function(destination) {
     this.moves++;
