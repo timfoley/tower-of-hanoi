@@ -1,0 +1,59 @@
+/*Colors: #30A9DE
+          #E53A40
+          #EFDC05
+          #090707*/
+
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  color: #E53A40;
+}
+
+.container {
+  display: flex;
+  width: 80%;
+  height: 60vh;
+  margin-top: 50px;
+  border: 5px solid #30A9DE;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  flex: auto;
+  margin: 0px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.col+.col {
+  border-left: 3px dashed #EFDC05;
+
+}
+
+.ring {
+  height: 1.5rem;
+  background: #E53A40;
+}
+
+.r1 {
+  width: 55%;
+}
+
+.r2 {
+  width: 70%
+}
+
+.r3 {
+  width: 85%
+}
+
+.r4 {
+  width: 100%
+}
