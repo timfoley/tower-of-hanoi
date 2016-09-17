@@ -23,32 +23,39 @@ var game = {
   click: function(clicked) {
     clickedRing = clicked.children().eq(0);
     if (!this.active) {
-      clickedRing.addClass('active');
       this.originCol = clicked;
+      clickedRing.addClass('active');
+      // this.originCol = clicked;
       this.moverId = clickedRing.attr('id');
       this.active = true;
-    } else if (this.checkMove(clickedRing)){
-      this.moveRing(clicked);
+    } else if (this.checkMove(clicked)){
+      // this.targetCol = clicked;
+      game.moveRing(clicked);
+      this.softReset();
+      this.incrementCounter();
       this.checkWin();
     } else {
-      this.softReset();
     }
 
   },
   checkMove: function(target) {
-    this.targetId = target.hasClass('ring') ? target.attr('id') : 100;
-    if (this.moverId < this.targetId) {
-      return true;
-    } else if (this.moverId == this.targetId){
+
+    this.targetCol = target;
+    // select eq(1) because we need to ignore the floating ring
+    targetRing = target.children().eq(1);
+    this.targetId = targetRing.hasClass('ring') ? targetRing.attr('id') : 100;
+    if (this.originCol.attr('class') == this.targetCol.attr('class')){
+      this.softReset();
       return false;
+    } else if (this.moverId < this.targetId) {
+      return true;
     } else {
+      game.targetCol = game.originCol;
       return false;
     }
   },
   moveRing: function(destination) {
-    this.incrementCounter();
     $('.active').prependTo(destination);
-    this.softReset()
   },
   incrementCounter: function() {
     // probably an unneccesary method...
@@ -78,6 +85,10 @@ var game = {
   reset: function() {
     this.softReset;
     this.moves = 0;
+    this.moverId = 0;
+    this.targetId = 0;
+    this.targetCol = {};
+    this.originCol = {};
     $moves.html('MOVES: ' + this.moves);
     $('.gameOver').remove();
     for (var i = 0; i < this.rings; i++) {
@@ -93,6 +104,8 @@ $columns.on('click', function(){
 $('.col').mouseenter(function(){
   if (!game.active) {
     $(this).children('.ring').eq(0).addClass('hover');
+  } else {
+    game.moveRing($(this));
   }
 });
 
