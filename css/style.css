@@ -34,7 +34,7 @@ h1 {
 }
 
 .col+.col {
-  border-left: 5px dashed #EFDC05;
+  border-left: 10px dashed #EFDC05;
 }
 
 .ring {
