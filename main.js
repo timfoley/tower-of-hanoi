@@ -1,4 +1,19 @@
-$rings = $('.rings')
+$rings = $('.ring');
+$columns = $('.col');
+
+$columns.on('click', function(){
+  game.click($(this));
+});
+
+$('.col').mouseenter(function(){
+  if (!game.active) {
+    $(this).children('.ring').eq(0).addClass('hover');
+  }
+});
+
+$('.col').mouseleave(function(){
+  $(this).children('.ring').eq(0).removeClass('hover');
+});
 
 var game = {
   columns: {
@@ -9,27 +24,48 @@ var game = {
   rings: 4,
   moves: 0,
   active: false,
-  click: function(mover) {
-    // once column has been clicked, decide what to do
-    // if active is false, set to true
-    // add active class to top ring
+  originCol: {},
+  click: function(clicked) {
+    clickedRing = clicked.children().eq(0);
+    if (!this.active) {
+      game.active = true;
+      clickedRing.addClass('active');
+      this.originCol = clicked;
+    } else if (this.checkMove(clickedRing)){
+      // else if active is true
+      // check to see if move is legal, if so make move
+      this.moveRing(clicked);
 
-    // else if active is true
-    // check to see if move is legal, if so make move
+    }
+
   },
-  checkMove: function(mover, target) {
-    // if mover's id > target id, make move
-    // if mover id == target id, set active to false
+  checkMove: function(target) {
+    // if originCol's firstchild's id > target's firstchild's id, make move
+    ringToMove = this.originCol.children().eq(0).attr('id');
+    targetRing = target ? target.attr('id') : 0;
+    if (ringToMove > targetRing) {
+      return true;
+    } else if (ringToMove == targetRing){
+      this.softReset();
+      return false;
+    } else {
+      console.log("That's not a legal move");
+      return false;
+    }
     // else give indication that move isn't legal (animation or something)
   },
-  moveRing: function(ring, destination) {
+  moveRing: function(destination) {
     // increment moves, move ring in DOM, set active to false
     this.moves++;
-    ring.appendTo(destination);
+    $('.active').appendTo(destination);
     this.active = false;
     // TODO move to the proper array in game.columns
     // try using .map?
 
+  },
+  softReset: function() {
+    $rings.removeClass('active hover');
+    this.active = false;
   },
   checkWin: function() {
     for (col in this.columns) {
@@ -46,7 +82,3 @@ var game = {
   },
 
 }
-
-$('.col').hover(function(){
-  $(this).children('.ring').first().toggleClass('hover');
-})

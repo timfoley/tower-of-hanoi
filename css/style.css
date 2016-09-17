@@ -65,3 +65,7 @@ h1 {
 .hover {
   transform: translate(0, -1rem);
 }
+
+.active {
+  transform: translate(0, -1rem);
+}
