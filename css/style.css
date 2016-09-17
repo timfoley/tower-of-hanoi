@@ -8,11 +8,20 @@ body {
   align-items: center;
   flex-direction: column;
   background: #090707;
+  font-family: 'Press Start 2P', sans-serif;
+}
+
+header {
+  color: white;
+}
+
+.moves {
+  text-align: right;
+  text-transform: uppercase;
 }
 
 h1 {
   color: #E53A40;
-  font-family: 'Press Start 2P', sans-serif;
   font-size: 50px;
 }
 
@@ -20,7 +29,8 @@ h1 {
   display: flex;
   width: 700px;
   height: 50vh;
-  border: 20px solid #30A9DE;
+  border: 17px solid #30A9DE;
+  margin-top: 5px;
 }
 
 .col {

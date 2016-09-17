@@ -8,7 +8,8 @@
 
 $rings = $('.ring');
 $columns = $('.col');
-$winningColumns = $('.c1,.c3')
+$winningColumns = $('.c1,.c3');
+$moves = $('.moves');
 
 $columns.on('click', function(){
   game.click($(this));
@@ -58,9 +59,14 @@ var game = {
     }
   },
   moveRing: function(destination) {
-    this.moves++;
+    this.incrementCounter();
     $('.active').prependTo(destination);
     this.softReset()
+  },
+  incrementCounter: function() {
+    // probably an unneccesary method...
+    this.moves++;
+    $moves.html('moves: ' + this.moves)
   },
   softReset: function() {
     this.active = false;
@@ -83,6 +89,7 @@ var game = {
   reset: function() {
     this.softReset;
     this.moves = 0;
+    $moves.html('moves: ' + this.moves)
     for (var i = 0; i < this.rings; i++) {
       $rings.eq(i).appendTo('.c2')
     }
