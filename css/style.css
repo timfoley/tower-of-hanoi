@@ -90,6 +90,14 @@ footer {
   font-size: 4rem;
   padding: 0;
   z-index: 100;
+  animation-name: blink;
+  animation-iteration-count: infinite;
+  animation-duration: 1.5s;
+}
+
+@keyframes blink {
+  from {opacity: 0}
+  to {opacity: 1}
 }
 
 .hover {
