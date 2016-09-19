@@ -120,20 +120,3 @@ footer {
   /*60% {transform: rotate(-5deg) translate(0, -1rem);}*/
   to {transform: translate(0, -1rem);}
 }
-
-
-.r1 {
-  width: 25%;
-}
-
-.r2 {
-  width: 50%
-}
-
-.r3 {
-  width: 75%
-}
-
-.r4 {
-  width: 100%
-}

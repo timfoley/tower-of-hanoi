@@ -30,7 +30,7 @@ var game = {
       // if a ring is NOT already selected...
       this.originCol = clicked;
       clickedRing.addClass('active');
-      this.moverId = clickedRing.attr('id');
+      this.moverId = parseInt(clickedRing.attr('id'));
       this.active = true;
     } else if (this.checkMove(clicked)){
       // if a ring IS selected, handle moving a ring
@@ -44,7 +44,7 @@ var game = {
     this.targetCol = target;
     // select eq(1) because we need to ignore the floating ring
     targetRing = target.children().eq(1);
-    this.targetId = targetRing.hasClass('ring') ? targetRing.attr('id') : -100;
+    this.targetId = targetRing.hasClass('ring') ? parseInt(targetRing.attr('id')) : -100;
     if (this.originCol.attr('class') == this.targetCol.attr('class')){
       // SAME SPACE
       this.softReset();
@@ -76,10 +76,7 @@ var game = {
   softReset: function() {
     this.active = false;
     // this feels klugey, but I can't get it to work otherwise
-    // TODO rewrite using animation rather than transition!
-    window.setTimeout(function() {
-      $rings.removeClass('active hover');
-    }, 20)
+    $rings.removeClass('active hover');
   },
   checkWin: function() {
     $winningColumns.each(function(column){
@@ -110,6 +107,7 @@ var game = {
     }
   },
   generateRings: function(n) {
+    $c2.children().remove();
     this.rings = n;
     var multiplier =  1/n;
     var width;
