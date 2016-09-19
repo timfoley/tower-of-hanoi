@@ -1,5 +1,5 @@
 //TODO:
-  // [ ] select/generate custom number of rings
+  // [x] select/generate custom number of rings
   // [ ] undo button
   // [ ] solver
 //QUESTIONS:
@@ -12,6 +12,7 @@ var $rings;
 var $c2 = $('.c2');
 var $moves = $('.moves');
 var $reset = $('#reset');
+var $arrows = $('.arrow');
 
 var game = {
   rings: 4,
@@ -21,8 +22,35 @@ var game = {
   targetCol: {},
   moverId: 0,
   targetId: 0,
-  over: false,
+  over: true,
   registerEvents: function() {
+    // clicking on a colum
+    $columns.on('click', function(){
+      if (!game.over){
+        game.click($(this));
+      }
+    });
+    // hovering over a column
+    $('.col').mouseenter(function(){
+      if (!game.active) {
+        $(this).children('.ring').eq(0).addClass('hover');
+      } else {
+        game.moveRing($(this));
+      }
+    });
+    // leaving a column
+    $('.col').mouseleave(function(){
+      $(this).children('.ring').eq(0).removeClass('hover');
+    });
+    // clicking reset
+    $reset.on('click', function() {
+      // why didn't this work when I did `$reset.on('click', game.reset)` ?
+      game.reset();
+    });
+    // clicking level-select arrows
+    $arrows.on('click', function(){
+      game.levelSelect($(this));
+    });
   },
   click: function(clicked) {
     clickedRing = clicked.children('.ring').eq(0);
@@ -75,7 +103,6 @@ var game = {
   },
   softReset: function() {
     this.active = false;
-    // this feels klugey, but I can't get it to work otherwise
     $rings.removeClass('active hover');
   },
   checkWin: function() {
@@ -93,6 +120,7 @@ var game = {
   },
   reset: function() {
     // this will be better when I can just make another instance with a constructor function, right?
+    this.generateRings(this.rings);
     this.over = false;
     this.softReset();
     this.moves = 0;
@@ -102,12 +130,20 @@ var game = {
     this.originCol = {};
     $moves.html('MOVES: ' + this.moves);
     $('.gameOver').remove();
-    for (var i = 0; i < this.rings; i++) {
-      $rings.eq(i).appendTo('.c2')
+  },
+  levelSelect: function(arrow) {
+    var $level = $('.level');
+    if (arrow.hasClass('left')) {
+      if (this.rings > 3) {
+        this.rings--;
+      }
+    } else if (this.rings < 20 ){
+      this.rings++;
     }
+    $level.html(this.rings);
   },
   generateRings: function(n) {
-    $c2.children().remove();
+    $columns.children().remove();
     this.rings = n;
     var multiplier =  1/n;
     var width;
@@ -121,31 +157,7 @@ var game = {
     $rings = $('.ring');
     // hard code height of all rings to flex doesn't mess with really tall towers
     $rings.height($rings.height());
-  },
+  }
 }
 
 game.registerEvents();
-
-// clicking on a colum
-$columns.on('click', function(){
-  if (!game.over){
-    game.click($(this));
-  }
-});
-// hovering over a column
-$('.col').mouseenter(function(){
-  if (!game.active) {
-    $(this).children('.ring').eq(0).addClass('hover');
-  } else {
-    game.moveRing($(this));
-  }
-});
-// leaving a column
-$('.col').mouseleave(function(){
-  $(this).children('.ring').eq(0).removeClass('hover');
-});
-// clicking reset
-$reset.on('click', function() {
-  // why didn't this work when I did `$reset.on('click', game.reset)` ?
-  game.reset();
-});
