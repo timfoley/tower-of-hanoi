@@ -119,7 +119,10 @@ var game = {
       $c2.children().eq(0).attr('id', i+1);
       $c2.children().eq(0).css('width', width)
     }
+    // reset this variable to account for all rings
     $rings = $('.ring');
+    // hard code height of all rings to flex doesn't mess with really tall towers
+    $rings.height($rings.height());
   },
 }
 
