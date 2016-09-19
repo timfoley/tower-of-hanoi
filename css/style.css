@@ -36,18 +36,6 @@ h1 {
   margin-top: 5px;
 }
 
-.flash {
-  animation-duration: 300ms;
-  animation-name: flash;
-  animation-timing-function: cubic-bezier(.42, 0, .58, 1);
-}
-
-@keyframes flash {
-  0% { background: #090707 }
-  50% { background: white; }
-  100% { background: #090707 }
-}
-
 footer {
   width: 100%;
   margin: 20px;
@@ -112,6 +100,19 @@ footer {
   background-color: white;
   transform: translate(0, -1rem);
 }
+
+.rumble {
+  animation-duration: 250ms;
+  animation-name: rumble;
+  animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes rumble {
+  from {transform: rotate(10deg) translate(0, -1rem);}
+  /*60% {transform: rotate(-5deg) translate(0, -1rem);}*/
+  to {transform: translate(0, -1rem);}
+}
+
 
 .r1 {
   width: 25%;

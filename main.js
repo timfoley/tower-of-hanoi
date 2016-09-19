@@ -1,5 +1,5 @@
 //TODO:
-  // [ ] select number of rings
+  // [ ] select/generate custom number of rings
   // [ ] undo button
   // [ ] solver
 //QUESTIONS:
@@ -43,14 +43,24 @@ var game = {
     targetRing = target.children().eq(1);
     this.targetId = targetRing.hasClass('ring') ? targetRing.attr('id') : 100;
     if (this.originCol.attr('class') == this.targetCol.attr('class')){
+      // SAME SPACE
       this.softReset();
       return false;
     } else if (this.moverId < this.targetId) {
+      // LEGAL MOVE
       return true;
     } else {
+      // ILLEGAL MOVE
       game.targetCol = game.originCol;
+      this.rumble();
       return false;
     }
+  },
+  rumble: function() {
+    $('.active').addClass('rumble');
+    $columns.on('animationend', '.rumble', function() {
+      $(this).removeClass('rumble');
+    });
   },
   moveRing: function(destination) {
     $('.active').prependTo(destination);
