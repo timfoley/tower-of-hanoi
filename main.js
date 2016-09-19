@@ -6,11 +6,12 @@
   // should I daisy chain my methods, or have them call in sequence?
   // should I use `this.` or `game.`? I'm assuming that when I get more OOJS about it, `this` would be easier to work with.
 
-$rings = $('.ring');
-$columns = $('.col');
-$winningColumns = $('.c1,.c3');
-$moves = $('.moves');
-$reset = $('#reset');
+var $columns = $('.col');
+var $winningColumns = $('.c1,.c3');
+var $rings;
+var $c2 = $('.c2');
+var $moves = $('.moves');
+var $reset = $('#reset');
 
 var game = {
   rings: 4,
@@ -21,32 +22,34 @@ var game = {
   moverId: 0,
   targetId: 0,
   over: false,
+  registerEvents: function() {
+  },
   click: function(clicked) {
     clickedRing = clicked.children('.ring').eq(0);
     if (!this.active) {
+      // if a ring is NOT already selected...
       this.originCol = clicked;
       clickedRing.addClass('active');
-      // this.originCol = clicked;
       this.moverId = clickedRing.attr('id');
       this.active = true;
     } else if (this.checkMove(clicked)){
+      // if a ring IS selected, handle moving a ring
       game.moveRing(clicked);
       this.softReset();
       this.incrementCounter();
       this.checkWin();
-    } else {
     }
   },
   checkMove: function(target) {
     this.targetCol = target;
     // select eq(1) because we need to ignore the floating ring
     targetRing = target.children().eq(1);
-    this.targetId = targetRing.hasClass('ring') ? targetRing.attr('id') : 100;
+    this.targetId = targetRing.hasClass('ring') ? targetRing.attr('id') : -100;
     if (this.originCol.attr('class') == this.targetCol.attr('class')){
       // SAME SPACE
       this.softReset();
       return false;
-    } else if (this.moverId < this.targetId) {
+    } else if (this.moverId > this.targetId) {
       // LEGAL MOVE
       return true;
     } else {
@@ -106,14 +109,29 @@ var game = {
       $rings.eq(i).appendTo('.c2')
     }
   },
+  generateRings: function(n) {
+    this.rings = n;
+    var multiplier =  1/n;
+    var width;
+    for (var i = 0; i < n; i++) {
+      width = (100 - i*multiplier*100) + '%';
+      $c2.prepend('<div class="ring"></div>');
+      $c2.children().eq(0).attr('id', i+1);
+      $c2.children().eq(0).css('width', width)
+    }
+    $rings = $('.ring');
+  },
 }
 
+game.registerEvents();
+
+// clicking on a colum
 $columns.on('click', function(){
   if (!game.over){
     game.click($(this));
   }
 });
-
+// hovering over a column
 $('.col').mouseenter(function(){
   if (!game.active) {
     $(this).children('.ring').eq(0).addClass('hover');
@@ -121,11 +139,11 @@ $('.col').mouseenter(function(){
     game.moveRing($(this));
   }
 });
-
+// leaving a column
 $('.col').mouseleave(function(){
   $(this).children('.ring').eq(0).removeClass('hover');
 });
-
+// clicking reset
 $reset.on('click', function() {
   // why didn't this work when I did `$reset.on('click', game.reset)` ?
   game.reset();
