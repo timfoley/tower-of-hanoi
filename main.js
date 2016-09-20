@@ -48,8 +48,8 @@ var game = {
       game.reset();
     });
     // clicking level-select arrows
-    $arrows.on('click', function(){
-      game.levelSelect($(this));
+    $c2.on('click', '.arrow', function(){
+      game.selectLevel($(this));
     });
   },
   click: function(clicked) {
@@ -131,7 +131,7 @@ var game = {
     $moves.html('MOVES: ' + this.moves);
     $('.gameOver').remove();
   },
-  levelSelect: function(arrow) {
+  selectLevel: function(arrow) {
     var $level = $('.level');
     if (arrow.hasClass('left')) {
       if (this.rings > 3) {
@@ -141,6 +141,12 @@ var game = {
       this.rings++;
     }
     $level.html(this.rings);
+  },
+  displayLevelSelector: function() {
+    var $levelSelect = $("<div class='level-select'><p>How tall?</p><div class='level-select-box'><p class='arrow left'><</p><span class='level'>4</span><p class='arrow right'>></p></div></div>");
+    $columns.children().remove();
+    $c2.append($levelSelect);
+    $('.level').html(this.rings);
   },
   generateRings: function(n) {
     $columns.children().remove();
@@ -162,3 +168,4 @@ var game = {
 }
 
 game.registerEvents();
+game.re

@@ -84,6 +84,17 @@ footer {
   transition: all 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.bounce {
+  animation-name: bounce;
+  animation-iteration-count: infinite;
+  animation-duration: 500ms;
+}
+
+@keyframes bounce {
+  from {transform: translate(0, -1rem)}
+  to {transform: translate(0, -1rem)}
+}
+
 .level-select {
   color: white;
   margin: auto -20rem  auto -20rem;
@@ -92,6 +103,10 @@ footer {
   align-items: center;
   transition: all 100ms ease;
   font-size: 1.5rem;
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
 }
 
 .level-select-box {
