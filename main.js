@@ -1,7 +1,7 @@
 //TODO:
-  // [x] select/generate custom number of rings
-  // [ ] undo button
   // [ ] solver
+  // [ ] display the minimum number of moves
+  // [ ] toggle start and reset button text
 //QUESTIONS:
   // should I daisy chain my methods, or have them call in sequence?
   // should I use `this.` or `game.`? I'm assuming that when I get more OOJS about it, `this` would be easier to work with.
@@ -137,7 +137,7 @@ var game = {
       if (this.rings > 3) {
         this.rings--;
       }
-    } else if (this.rings < 20 ){
+    } else if (this.rings < 15 ){
       this.rings++;
     }
     $level.html(this.rings);
@@ -157,6 +157,7 @@ var game = {
     $rings = $('.ring');
     // hard code height of all rings to flex doesn't mess with really tall towers
     $rings.height($rings.height());
+    $reset.html('RESET');
   }
 }
 
