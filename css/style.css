@@ -115,6 +115,8 @@ footer > a {
   font-size: 2rem;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .arrow:hover {
@@ -124,7 +126,7 @@ footer > a {
 .level {
   color: white;
   font-size: 4rem;
-  padding: 1rem;
+  padding: .5rem;
 }
 
 
