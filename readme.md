@@ -6,6 +6,14 @@ The Tower of Hanoi is a classic math game/puzzle. The object of the game is to m
   1. Each move consists of taking the upper disk from one of the stacks and placing it on top of another stack i.e. a disk can only be moved if it is the uppermost disk on a stack.
   1. No disk may be placed on top of a smaller disk. _Wikipedia_](https://en.wikipedia.org/wiki/Tower_of_Hanoi)
 
+## What Can I Do? (USER STORIES)
+A user should be able to:
+- select the height of the tower to adjust game difficulty
+- move blocks from one column to another so they can play the game
+- reset the towers so they can start over again
+- know if they've won the game, and see how far off their score was from perfect
+- tell if a move is illegal so they don't try to drop blocks where they can't go
+
 ## What's it Made Of?
 HTML, CSS, and JavaScript (with a whole lotta help from jQuery)
 
