@@ -51,9 +51,10 @@ footer > a {
   display: inline-block;
 }
 
-#reset:hover {
+footer > a:hover {
   background: #E53A40;
 }
+
 
 #reset:active {
   transform: translate(0, 2px);

@@ -108,7 +108,6 @@ var game = {
     $('.active').prependTo(destination);
   },
   incrementCounter: function() {
-    // probably an unneccesary method...
     this.moves++;
     $moves.html('moves: ' + this.moves)
   },
