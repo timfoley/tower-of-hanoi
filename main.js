@@ -125,8 +125,10 @@ var game = {
   },
   gameOver: function() {
     this.over = true;
-    $('.c2').prepend("<div class='gameOver'>YOU WIN!</div>");
-    console.log("You won in " + this.moves + " moves!");
+    var perfect = Math.pow(2, this.rings) - 1;
+    $('.c2').prepend("<div class='gameOver report'></div>")
+    $('.c2').prepend("<div class='gameOver big'>YOU WIN!</div>");
+    $('.report').html("<p>Your Score: " + this.moves + "</p><p>Perfect: " + perfect + "</p");
   },
   reset: function() {
     // this will be better when I can just make another instance with a constructor function, right?

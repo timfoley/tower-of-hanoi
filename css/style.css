@@ -135,13 +135,24 @@ footer > a:hover {
 .gameOver {
   color: white;
   margin: auto -20rem  auto -20rem ;
-  font-size: 4rem;
   padding: 0;
+  font-size: .9rem;
   z-index: 100;
+  text-align: center;
+}
+
+.report {
+  margin-top: 0;
+}
+
+.big {
+  font-size: 4rem;
   animation-name: blink;
   animation-iteration-count: infinite;
   animation-duration: 1.5s;
 }
+
+
 
 @keyframes blink {
   from {opacity: 0}
