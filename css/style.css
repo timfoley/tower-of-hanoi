@@ -42,7 +42,7 @@ footer {
   text-align: right;
 }
 
-#reset {
+footer > a {
   padding: 10px 20px 10px 20px;
   color: #090707;
   text-decoration: none;
@@ -87,12 +87,14 @@ footer {
 .bounce {
   animation-name: bounce;
   animation-iteration-count: infinite;
-  animation-duration: 500ms;
+  animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation-duration: 800ms;
+  animation-delay: 300ms;
 }
 
 @keyframes bounce {
-  from {transform: translate(0, -1rem)}
-  to {transform: translate(0, -1rem)}
+  0%, 90%    {transform: translate(0, -1rem)}
+  90%, 100%  {transform: translate(0, 0)}
 }
 
 .level-select {

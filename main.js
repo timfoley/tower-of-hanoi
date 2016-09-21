@@ -1,7 +1,7 @@
 //TODO:
   // [ ] solver
   // [ ] display the minimum number of moves
-  // [ ] toggle start and reset button text
+  // [x] toggle start and reset button text
 //QUESTIONS:
   // should I daisy chain my methods, or have them call in sequence?
   // should I use `this.` or `game.`? I'm assuming that when I get more OOJS about it, `this` would be easier to work with.
@@ -12,6 +12,7 @@ var $rings;
 var $c2 = $('.c2');
 var $moves = $('.moves');
 var $reset = $('#reset');
+var $levelButton = $('#levelButton');
 var $arrows = $('.arrow');
 
 var game = {
@@ -30,6 +31,7 @@ var game = {
         game.click($(this));
       }
     });
+
     // hovering over a column
     $('.col').mouseenter(function(){
       if (!game.active) {
@@ -38,15 +40,24 @@ var game = {
         game.moveRing($(this));
       }
     });
+
     // leaving a column
     $('.col').mouseleave(function(){
       $(this).children('.ring').eq(0).removeClass('hover');
     });
+
+    // clicking pick level
+    $levelButton.on('click', function() {
+      game.displayLevelSelector();
+    })
+
+
     // clicking reset
     $reset.on('click', function() {
       // why didn't this work when I did `$reset.on('click', game.reset)` ?
       game.reset();
     });
+
     // clicking level-select arrows
     $c2.on('click', '.arrow', function(){
       game.selectLevel($(this));
@@ -143,6 +154,8 @@ var game = {
     $level.html(this.rings);
   },
   displayLevelSelector: function() {
+    $reset.html('START');
+    $levelButton.hide();
     var $levelSelect = $("<div class='level-select'><p>How tall?</p><div class='level-select-box'><p class='arrow left'><</p><span class='level'>4</span><p class='arrow right'>></p></div></div>");
     $columns.children().remove();
     $c2.append($levelSelect);
@@ -164,8 +177,8 @@ var game = {
     // hard code height of all rings to flex doesn't mess with really tall towers
     $rings.height($rings.height());
     $reset.html('RESET');
+    $levelButton.show();
   }
 }
 
 game.registerEvents();
-game.re
