@@ -7,8 +7,9 @@
   // should I use `this.` or `game.`? I'm assuming that when I get more OOJS about it, `this` would be easier to work with.
 
 var $columns = $('.col');
-var $winningColumns = $('.c1,.c3');
+var $winningColumns = $('.c2,.c3');
 var $rings;
+var $c1 = $('.c1');
 var $c2 = $('.c2');
 var $moves = $('.moves');
 var $reset = $('#reset');
@@ -132,6 +133,7 @@ var game = {
   },
   reset: function() {
     // this will be better when I can just make another instance with a constructor function, right?
+    $columns.children().remove();
     this.generateRings(this.rings);
     this.over = false;
     this.softReset();
@@ -141,7 +143,10 @@ var game = {
     this.targetCol = {};
     this.originCol = {};
     $moves.html('MOVES: ' + this.moves);
+    $reset.html('RESET');
+    $('.level-select').remove();
     $('.gameOver').remove();
+    $levelButton.show();
   },
   selectLevel: function(arrow) {
     var $level = $('.level');
@@ -153,32 +158,33 @@ var game = {
       this.rings++;
     }
     $level.html(this.rings);
+    this.generateRings(this.rings);
   },
   displayLevelSelector: function() {
     $reset.html('START');
     $levelButton.hide();
+    this.over = true;
     var $levelSelect = $("<div class='level-select'><p>How tall?</p><div class='level-select-box'><p class='arrow left'><</p><span class='level'>4</span><p class='arrow right'>></p></div></div>");
     $columns.children().remove();
     $c2.append($levelSelect);
     $('.level').html(this.rings);
+    this.generateRings(this.rings);
   },
   generateRings: function(n) {
-    $columns.children().remove();
-    this.rings = n;
+    $c1.children().remove();
+    // this.rings = n;
     var multiplier =  1/n;
     var width;
     for (var i = 0; i < n; i++) {
       width = (100 - i*multiplier*100) + '%';
-      $c2.prepend('<div class="ring"></div>');
-      $c2.children().eq(0).attr('id', i+1);
-      $c2.children().eq(0).css('width', width)
+      $c1.prepend('<div class="ring"></div>');
+      $c1.children().eq(0).attr('id', i+1);
+      $c1.children().eq(0).css('width', width)
     }
     // reset this variable to account for all rings
     $rings = $('.ring');
     // hard code height of all rings to flex doesn't mess with really tall towers
     $rings.height($rings.height());
-    $reset.html('RESET');
-    $levelButton.show();
   }
 }
 
