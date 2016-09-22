@@ -189,3 +189,4 @@ var game = {
 }
 
 game.registerEvents();
+game.displayLevelSelector();
